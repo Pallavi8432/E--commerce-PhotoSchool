@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>About Us - PhotoSchool</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="logo">
+          <a href="index.html">
+            <img src="/photos/logo.png" alt="/" width="125px" />
+          </a>
+        </div>
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="contact.html">Contacts</a></li>
+            <li><a href="account.html">Account</a></li>
+          </ul>
+        </nav>
+        <a href="cart.html">
+          <i class="fa fa-shopping-cart"></i>
+        </a>
+        <div class="menu-icon" onclick="menutoggle()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="container">
+        <h1 class="animate-heading">About Us</h1>
+        <p class="animate-text">
+          Welcome to PhotoSchool, your number one source for all photography
+          needs. We're dedicated to providing you the very best of photography
+          equipment, with an emphasis on quality, affordability, and customer
+          service.
+        </p>
+        <p class="animate-text">
+          Founded in 2024, PhotoSchool has come a long way from its beginnings.
+          When we first started out, our passion for photography drove us to
+          start this online store so that PhotoSchool can offer you the world's
+          most advanced and affordable photography products. We now serve
+          customers all over the world and are thrilled that we're able to turn
+          our passion into our own website.
+        </p>
+        <p class="animate-text">
+          We hope you enjoy our products as much as we enjoy offering them to
+          you. If you have any questions or comments, please don't hesitate to
+          contact us.
+        </p>
+        <h3 class="animate-heading">Our Mission</h3>
+        <p class="animate-text">
+          To provide photographers of all levels with the highest quality
+          products and services, ensuring they can capture every moment
+          perfectly.
+        </p>
+        <h3 class="animate-heading">Our Vision</h3>
+        <p class="animate-text">
+          To be the leading global provider of photography solutions, inspiring
+          creativity and innovation in every photographer.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col-1">
+            <h3>Download our App</h3>
+            <p>Download App for Android and iOS mobile phones.</p>
+            <div class="app-logo">
+              <img src="images/play-store.png" alt="" />
+              <img src="images/app-store.png" alt="" />
+            </div>
+          </div>
+          <div class="footer-col-2">
+            <img src="/photos/logo2.png" alt="" />
+            <p>
+              Our purpose is to give the best quality product to the customer
+              and bring them back and make them happy.
+            </p>
+          </div>
+          <div class="footer-col-3">
+            <h3>Useful Links</h3>
+            <ul>
+              <li>Coupons</li>
+              <li>Blog Post</li>
+              <li>Return Policy</li>
+              <li>Join Affiliate</li>
+            </ul>
+          </div>
+          <div class="footer-col-4">
+            <h3>Follow Us</h3>
+            <ul>
+              <li>Twitter</li>
+              <li>Instagram</li>
+              <li>Youtube</li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p class="copyright">Copyright &copy; 2024</p>
+      </div>
+    </div>
+
+    <style>
+      .about-section {
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .about-section h1,
+      .about-section h3 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600; /* Use a bold font for headings */
+      }
+
+      .about-section p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #555;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      var MenuItems = document.getElementById("MenuItems");
+
+      MenuItems.style.maxHeight = "0px";
+
+      function menutoggle() {
+        if (MenuItems.style.maxHeight == "0px") {
+          MenuItems.style.maxHeight = "200px";
+        } else {
+          MenuItems.style.maxHeight = "0px";
+        }
+      }
+
+      gsap
+        .timeline({
+          defaults: {
+            duration: 1,
+          },
+        })
+        .from(".navbar", {
+          y: "-100%",
+          ease: "linear",
+        })
+        .from("#MenuItems li", {
+          opacity: 0,
+          stagger: 0.3,
+        });
+
+      gsap.from(".animate-heading", {
+        scrollTrigger: {
+          trigger: ".animate-heading",
+          scroller: "body",
+          start:"top 60%",
+          end:"top 40%",
+          scrub:2
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+      });
+
+      gsap.from(".animate-text", {
+        scrollTrigger: {
+          trigger: ".animate-text",
+          scroller: "body",
+          start:"top 60%",
+          end:"top 40%",
+          scrub:2
+        },
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Products - E-commerce PhotoSchool</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="photos/logo.png" alt="/" width="125px" />
+                </a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="contact.html">Contacts</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <div class="menu-icon" onclick="menutoggle()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All Products</h2>
+            <select id="sortOptions" onchange="renderProducts()">
+                <option value="default">Default Sorting</option>
+                <option value="price-asc">Sort by Price: Low to High</option>
+                <option value="price-desc">Sort by Price: High to Low</option>
+                <option value="popularity">Sort by Popularity</option>
+                <option value="rating">Sort by Rating</option>
+                <option value="sale">Sort by Sale</option>
+            </select>
+        </div>
+
+        <div id="productContainer" class="row"></div>
+
+        <div class="page-btn" id="pagination">
+            <!-- Pagination buttons will be dynamically generated here -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download our App</h3>
+                    <p>Download App for Android and iOS mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png" alt="Play Store" />
+                        <img src="images/app-store.png" alt="App Store" />
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="photos/logo2.png" alt="Logo" />
+                    <p>
+                        Our purpose is to give the best quality product to the customer
+                        and bring them back and make them happy.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <p class="copyright">Copyright &copy; 2024</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script>
+         const products = [
+        {
+          name: "CANON EOS 1D MarkIII -body",
+          price: 189990,
+          image: "photos/canonmarkiii.jpg",
+          popularity: 5,
+          rating: 4.8,
+          sale: 100,
+        },
+        {
+          name: "Nikon D6",
+          price: 183990,
+          image: "photos/Nikond6.jpg",
+          popularity: 4,
+          rating: 4.7,
+          sale: 150,
+        },
+        {
+          name: "SAMYANG 35 mm",
+          price: 9290,
+          image: "photos/sonylen.png",
+          popularity: 3,
+          rating: 4.5,
+          sale: 200,
+        },
+        {
+          name: "ROLLEI C6i",
+          price: 4990,
+          image: "photos/triport.jpg",
+          popularity: 3,
+          rating: 4.3,
+          sale: 250,
+        },
+        {
+          name: "PANASONIC HC-X1",
+          price: 72990,
+          image: "photos/panasonic_HC_VX1.jpg",
+          popularity: 4,
+          rating: 4.5,
+          sale: 280,
+        },
+        {
+          name: "DJI MAVIC 2 Zoom",
+          price: 30990,
+          image: "./photos/djimavic2zoom.jpg",
+          popularity: 4,
+          rating: 4.0,
+          sale: 100, 
+        },
+        {
+          name: "ZEISS Loxia 85 mm f/2,4 Sonnar pro Sony E",
+          price: 30590,
+          image: "./photos/zeissloxia.jpg",
+          popularity: 4,
+          rating: 4.0,
+          sale: 230, 
+        },
+        {
+          name: "TOKINA 16-28 mm T3 Cinema ATX pro Canon EF",
+          price: 77990,
+          image: "./photos/tokina.jpg",
+          popularity: 4,
+          rating: 4.0,
+          sale: 340, 
+        },
+        {
+          name: "CANON EOS C300 Mark III",
+          price: 327000,
+          image: "/photos/canonc300.jpg",
+          popularity: 4,
+          rating: 4.5,
+          sale: 340, 
+        },
+        {
+          name: "GITZO Adventury 30 L",
+          price: 3990,
+          image: "./photos/gitzo.jpg",
+          popularity: 3,
+          rating: 4.0,
+          sale: 30, 
+        },
+        {
+          name: "SONY PXW-FX9",
+          price: 333990,
+          image: "/photos/sonyPxW-FX9.jpg",
+          popularity: 4,
+          rating: 4.5,
+          sale: 450, 
+        },
+        {
+          name: "NANLITE LitoLite 5C RGBWW LED",
+          price: 2490,
+          image: "photos/Nanlite-LitoLite-5C-1.jpg",
+          popularity: 5,
+          rating: 4.0,
+          sale: 540, 
+        },
+        {
+          name: "LUME CUBE Dual Pack",
+          price: 3990,
+          image: "/photos/lumecubedualpack.jpeg",
+          popularity: 4,
+          rating: 4.5,
+          sale: 430, 
+        },
+        {
+          name: "ZHIYUN WEEBILL S",
+          price: 9990,
+          image: "/photos/zhiyun.jfif",
+          popularity: 4,
+          rating: 4.0,
+          sale: 30, 
+        },
+        {
+          name: "SONY DSC-RX0",
+          price: 16980,
+          image: "/photos/sonyziss.jpg",
+          popularity: 4,
+          rating: 4.0,
+          sale: 0,
+        },
+      ];
+
+        const itemsPerPage = 4;
+        let currentPage = 1;
+
+        function displayProducts(productsToDisplay) {
+            const productContainer = document.getElementById("productContainer");
+            productContainer.innerHTML = "";
+
+            productsToDisplay.forEach((product) => {
+                const productHTML = `
+                <div class="col-4">
+                    <img src="${product.image}" alt="${product.name}" />
+                    <h4>${product.name}</h4>
+                    <p>INR ${product.price}</p>
+                    <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Add to Cart</button>
+                </div>
+                `;
+                productContainer.insertAdjacentHTML("beforeend", productHTML);
+            });
+        }
+
+        function paginate(products) {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            return products.slice(startIndex, endIndex);
+        }
+
+        function generatePaginationButtons(totalItems) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            // Add "Previous" button
+            const prevButton = document.createElement("span");
+            prevButton.innerHTML = "&#8592;";
+            prevButton.classList.add("prev-next");
+            prevButton.onclick = () => changePage(currentPage - 1);
+            if (currentPage === 1) prevButton.classList.add("disabled");
+            pagination.appendChild(prevButton);
+
+            // Add page numbers with range
+            const range = 2; // Number of page numbers to show before and after the current page
+            const startPage = Math.max(1, currentPage - range);
+            const endPage = Math.min(totalPages, currentPage + range);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement("span");
+                pageButton.innerText = i;
+                pageButton.classList.add(i === currentPage ? "active" : "");
+                pageButton.onclick = () => changePage(i);
+                pagination.appendChild(pageButton);
+            }
+
+            // Add "Next" button
+            const nextButton = document.createElement("span");
+            nextButton.innerHTML = "&#8594;";
+            nextButton.classList.add("prev-next");
+            nextButton.onclick = () => changePage(currentPage + 1);
+            if (currentPage === totalPages) nextButton.classList.add("disabled");
+            pagination.appendChild(nextButton);
+        }
+
+        function changePage(page) {
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+
+            // Ensure page is within bounds
+            if (page < 1 || page > totalPages) return;
+
+            currentPage = page;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const sortedProducts = sortProducts();
+            const paginatedProducts = paginate(sortedProducts);
+            displayProducts(paginatedProducts);
+            generatePaginationButtons(sortedProducts.length);
+        }
+
+        function sortProducts() {
+            const sortOption = document.getElementById("sortOptions").value;
+            let sortedProducts = [...products];
+
+            switch (sortOption) {
+                case "price-asc":
+                    sortedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case "price-desc":
+                    sortedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case "popularity":
+                    sortedProducts.sort((a, b) => b.popularity - a.popularity);
+                    break;
+                case "rating":
+                    sortedProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                case "sale":
+                    sortedProducts.sort((a, b) => b.sale - a.sale);
+                    break;
+                default:
+                    break;
+            }
+
+            return sortedProducts;
+        }
+
+        document.getElementById("sortOptions").addEventListener("change", () => {
+            currentPage = 1; // Reset to first page on sort change
+            renderProducts();
+        });
+
+        // Initialize the page with default products and pagination
+        renderProducts();
+
+        // Menu toggle functionality
+        const MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight === "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        gsap
+            .timeline({
+                defaults: {
+                    duration: 1,
+                },
+            })
+            .from(".navbar", {
+                y: "-100%",
+                ease: "linear",
+            })
+            .from("#MenuItems li", {
+                opacity: 0,
+                stagger: 0.3,
+            });
+
+        // Add to Cart functionality
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const existingProduct = cart.find((product) => product.name === name);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${name} has been added to your cart.`);
+        }
+    </script>
+</body>
+</html>
